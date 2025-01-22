@@ -1,0 +1,13 @@
+ul {
+    list-style-type: none;
+}
+
+li {
+    background-color: rgb(215, 211, 211);
+    padding: 10px;
+}
+
+li:hover {
+    background-color: rgb(150, 147, 147);
+    transition-duration: 0.5s;
+}
