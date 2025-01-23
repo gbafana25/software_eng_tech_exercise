@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 import json
+from sqlalchemy import and_, or_
 
 app = Flask(__name__)
 CORS(app)
@@ -31,18 +32,20 @@ def get_items():
 @app.route("/search-items", methods=['POST'])
 def search_items():
     # order: name, quantity cost
-    # request data = { search_filters: [], search_strings: []}
+    # request data = { name: "", quantity: ``, cost: ``}
     search_query = json.loads(request.data)
-    # TODO: loop over items and apply filters
-    all_items = GroceryItem.query.all()
+    query = GroceryItem.query.all()
+    all_items = []
+    #all_items = GroceryItem.query.filter(GroceryItem.name.like(namefilter), GroceryItem.quantity == quantityfilter, GroceryItem.cost == costfilter).all()
+ 
     result_list = []
-    for i in all_items:
-        if i.name == search_query['search_strings'][0]:
-            result_list.append({"name":i.name, "quantity": i.quantity, "cost": i.cost})
-    if len(result_list) == 0:
-        return "No matches found"
-    else:
-        return {"results": result_list}
+    for s in query:
+        if search_query['name'] == "" or s.name == search_query['name']:
+            if search_query['quantity'] == -1 or s.quantity == search_query['quantity']:
+                if search_query['cost'] == -1 or s.cost == search_query['cost']:
+                    result_list.append({"name":s.name, "quantity": s.quantity, "cost": s.cost})
+
+    return {"results": result_list}
 
 @app.route("/add-item", methods=['POST'])
 def add_item():
