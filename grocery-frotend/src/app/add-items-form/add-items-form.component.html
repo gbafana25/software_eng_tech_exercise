@@ -1,0 +1,19 @@
+<h2>Add new grocery item</h2>
+<ul>
+    <li>
+    <label for="prod_name">Name</label>
+    <input name="prod_name" type="text" [(ngModel)]="prod_name">
+    </li>
+    
+    <li>
+    <label for="prod_quantity">Quantity</label>
+    <input name="prod_quantity" type="number" [(ngModel)]="prod_quantity">
+    </li>
+    
+    <li>
+    <label for="prod_cost">Cost (per item)</label>
+    <input name="prod_cost" type="number" [(ngModel)]="prod_cost" step="0.01">
+    </li>
+
+    <button (click)="onAddItem()">Add</button>
+</ul>

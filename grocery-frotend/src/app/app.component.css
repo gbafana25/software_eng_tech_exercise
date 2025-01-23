@@ -2,3 +2,32 @@
     background-color: red;
     padding: 25px;
 }
+
+.add-btn {
+    text-decoration: none;
+    background-color: green;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.add-btn:hover {
+    background-color: rgba(0, 128, 0, 0.669);
+    transition-duration: 0.5s;
+}
+
+.home-btn {
+    text-decoration: none;
+    background-color: orange;
+    color: black;
+    padding: 15px;
+    border-radius: 10px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.home-btn:hover {
+   transition-duration: 0.5s;
+   background-color: rgba(255, 166, 0, 0.556); 
+}
