@@ -40,12 +40,12 @@ def search_items():
  
     result_list = []
     for s in query:
-        if search_query['name'] == "" or s.name == search_query['name']:
+        if search_query['name'] == "none" or search_query['name'] in s.name:
             if search_query['quantity'] == -1 or s.quantity == search_query['quantity']:
                 if search_query['cost'] == -1 or s.cost == search_query['cost']:
                     result_list.append({"name":s.name, "quantity": s.quantity, "cost": s.cost})
 
-    return {"results": result_list}
+    return {"items": result_list}
 
 @app.route("/add-item", methods=['POST'])
 def add_item():

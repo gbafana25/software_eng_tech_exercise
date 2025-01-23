@@ -1,3 +1,17 @@
+<h2>Search Groceries</h2>
+<div>
+    <label class="search-elements" for="name_input">Name</label>
+    <input class="search-elements" name="name_input" type="text" [(ngModel)]="name_search">
+
+    <label class="search-elements" for="quant_input">Quantity</label>
+    <input class="search-elements" name="quant_input" type="number" [(ngModel)]="quant_search">
+
+    <label class="search-elements" for="cost_input">Cost</label>
+    <input class="search-elements" name="cost_input" type="number" step=".01" [(ngModel)]="cost_search">
+
+    <button (click)="searchItems()">Search</button>
+</div>
+
 <h2>Current List</h2>
 <ul *ngFor="let item of all_items.items">
     <li>{{item.name}} | {{item.quantity}} | {{item.cost}}</li>
