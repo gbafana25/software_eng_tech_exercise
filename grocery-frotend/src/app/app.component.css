@@ -1,33 +1,68 @@
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fa;
+}
+
 .navbar {
-    background-color: red;
-    padding: 25px;
-}
-
-.add-btn {
-    text-decoration: none;
-    background-color: green;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d74c4c;
+    padding: 15px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: white;
-    padding: 15px;
-    border-radius: 10px;
-    font-weight: bold;
 }
 
-.add-btn:hover {
-    background-color: rgba(0, 128, 0, 0.669);
-    transition-duration: 0.5s;
+
+.navbar h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
 }
+
+.navbar a {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
 
 .home-btn {
-    text-decoration: none;
-    background-color: orange;
-    color: black;
-    padding: 15px;
-    border-radius: 10px;
-    margin-right: 10px;
-    font-weight: bold;
+    background-color: #45a049;
 }
 
-.home-btn:hover {
-   transition-duration: 0.5s;
-   background-color: rgba(255, 166, 0, 0.556); 
+
+.add-btn {
+    background-color: #2196F3;
+}
+
+
+.navbar a:hover {
+    background-color: #333;
+}
+
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navbar h1 {
+        margin-bottom: 10px;
+    }
+
+    .navbar a {
+        margin: 10px 0;
+        padding: 12px 20px;
+        width: 100%;
+    }
 }

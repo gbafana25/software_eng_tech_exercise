@@ -1,11 +1,97 @@
-ul {
+.form-heading {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+.add-item-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.form-list {
     list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
-label {
-    padding-right: 25px;
+
+.form-item {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
-li {
-    padding: 10px;
+
+.form-label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box; 
+    background-color: #fff;
+}
+
+.form-input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.form-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.add-item-button {
+    padding: 12px 25px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: auto;
+    transition: background-color 0.3s ease;
+}
+
+
+.add-item-button:hover {
+    background-color: #45a049;
+}
+
+
+@media (max-width: 768px) {
+    .add-item-form {
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    .form-item {
+        margin-bottom: 15px;
+    }
+
+    .form-input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .add-item-button {
+        width: 100%;
+    }
 }

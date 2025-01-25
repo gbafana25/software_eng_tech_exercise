@@ -14,5 +14,11 @@
 
 <h2>Current List</h2>
 <ul *ngFor="let item of all_items.items">
-    <li>{{item.name}} | {{item.quantity}} | {{item.cost}}</li>
+  <li class="list-item">
+    <div class="item-container">
+      <div class="item-name">{{item.name}}</div>
+      <div class="item-quantity">Quantity: {{item.quantity}}</div>
+      <div class="item-cost">Cost: ${{item.cost}}</div>
+    </div>
+  </li>
 </ul>

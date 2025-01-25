@@ -1,19 +1,23 @@
-<h2>Add new grocery item</h2>
-<ul>
-    <li>
-    <label for="prod_name">Name</label>
-    <input name="prod_name" type="text" [(ngModel)]="prod_name">
-    </li>
-    
-    <li>
-    <label for="prod_quantity">Quantity</label>
-    <input name="prod_quantity" type="number" [(ngModel)]="prod_quantity">
-    </li>
-    
-    <li>
-    <label for="prod_cost">Cost (per item)</label>
-    <input name="prod_cost" type="number" [(ngModel)]="prod_cost" step="0.01">
-    </li>
+<h2 class="form-heading">Add new grocery item</h2>
+<div class="add-item-form">
+    <ul class="form-list">
+        <li class="form-item">
+        <label for="prod_name" class="form-label">Name</label>
+        <input name="prod_name" type="text" [(ngModel)]="prod_name" class="form-input">
+        </li>
+        
+        <li class="form-item">
+        <label for="prod_quantity" class="form-label">Quantity</label>
+        <input name="prod_quantity" type="number" [(ngModel)]="prod_quantity" class="form-input">
+        </li>
+        
+        <li class="form-item">
+        <label for="prod_cost" class="form-label">Cost (per item)</label>
+        <input name="prod_cost" type="number" [(ngModel)]="prod_cost" step="0.01" class="form-input">
+        </li>
 
-    <button (click)="onAddItem()">Add</button>
-</ul>
+        <li class="form-button-container">
+            <button class="add-item-button" (click)="onAddItem()">Add</button>
+        </li>
+    </ul>
+</div>
