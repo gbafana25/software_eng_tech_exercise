@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [NgFor, FormsModule],
+  imports: [NgFor, FormsModule, CommonModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })

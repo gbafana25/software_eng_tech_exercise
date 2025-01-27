@@ -18,7 +18,7 @@
     <div class="item-container">
       <div class="item-name">{{item.name}}</div>
       <div class="item-quantity">Quantity: {{item.quantity}}</div>
-      <div class="item-cost">Cost: ${{item.cost}}</div>
+      <div class="item-cost">Cost: ${{item.cost | number:'1.2-2'}}</div>
     </div>
   </li>
 </ul>
