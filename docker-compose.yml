@@ -1,0 +1,9 @@
+services:
+  frontend:
+    build: ./grocery-frotend
+    ports:
+      - "80:80"
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
