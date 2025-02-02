@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 import json
@@ -20,6 +20,12 @@ class GroceryItem(db.Model):
         self.name = name
         self.quantity = quantity
         self.cost = cost
+
+@app.before_request
+def before_req():
+    headers = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' } 
+    if request.method == 'OPTIONS' or request.method == 'options': 
+        return jsonify(headers), 200
 
 @app.route("/get-items", methods=['GET'])
 def get_items():
