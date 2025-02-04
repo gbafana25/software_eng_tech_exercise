@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, Response
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 import json
 from sqlalchemy import and_, or_
@@ -28,6 +28,7 @@ def before_req():
         return jsonify(headers), 200
 
 @app.route("/get-items", methods=['GET'])
+@cross_origin()
 def get_items():
     all_items = GroceryItem.query.all()
     items_list = []
@@ -39,6 +40,7 @@ def get_items():
     #return {"items": items_list}
 
 @app.route("/search-items", methods=['POST'])
+@cross_origin()
 def search_items():
     # order: name, quantity cost
     # request data = { name: "", quantity: ``, cost: ``}
@@ -57,6 +59,7 @@ def search_items():
     return {"items": result_list}
 
 @app.route("/add-item", methods=['POST'])
+@cross_origin()
 def add_item():
     resp = json.loads(request.data)
     newitem = GroceryItem(resp['name'], resp['quantity'], resp['cost'])
