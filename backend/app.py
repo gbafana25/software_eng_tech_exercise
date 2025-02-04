@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 import json
@@ -33,7 +33,10 @@ def get_items():
     items_list = []
     for i in all_items:
         items_list.append({"name": i.name, "quantity": i.quantity, "cost": i.cost})
-    return {"items": items_list}
+    resp = Response(response=json.dumps({"items": items_list}))
+    resp.headers['Access-Control-Allow-Origin'] = "*"
+    return resp
+    #return {"items": items_list}
 
 @app.route("/search-items", methods=['POST'])
 def search_items():
