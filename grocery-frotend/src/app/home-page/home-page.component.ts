@@ -22,7 +22,7 @@ export class HomePageComponent {
   }
 
   async getGroceryItems() {
-    const resp = await fetch("http://172.31.1.240:5000/get-items")
+    const resp = await fetch("http://localhost:5000/get-items")
     this.all_items = await resp.json()
     console.log(this.all_items)
   }
@@ -42,7 +42,7 @@ export class HomePageComponent {
       costfield = this.cost_search
     }
     
-    const r = await fetch("http://172.31.1.240:5000/search-items", {
+    const r = await fetch("http://localhost:5000/search-items", {
       method: "POST",
       body: JSON.stringify({
         name: namefield,
