@@ -5,7 +5,7 @@ import json
 from sqlalchemy import and_, or_
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///items.sqlite3"
 db = SQLAlchemy(app)
@@ -28,19 +28,20 @@ def before_req():
         return jsonify(headers), 200
 
 @app.route("/get-items", methods=['GET'])
-@cross_origin()
+#@cross_origin()
 def get_items():
     all_items = GroceryItem.query.all()
     items_list = []
     for i in all_items:
         items_list.append({"name": i.name, "quantity": i.quantity, "cost": i.cost})
     resp = Response(response=json.dumps({"items": items_list}))
-    resp.headers['Access-Control-Allow-Origin'] = "*"
+    #resp.headers['Access-Control-Allow-Origin'] = "*"
+    resp.headers.add('Access-Control-Allow-Origin', "*")
     return resp
     #return {"items": items_list}
 
 @app.route("/search-items", methods=['POST'])
-@cross_origin()
+#@cross_origin()
 def search_items():
     # order: name, quantity cost
     # request data = { name: "", quantity: ``, cost: ``}
@@ -56,10 +57,14 @@ def search_items():
                 if search_query['cost'] == -1 or s.cost == search_query['cost']:
                     result_list.append({"name":s.name, "quantity": s.quantity, "cost": s.cost})
 
-    return {"items": result_list}
+    resp = Response(response=json.dumps({"items": result_list}))
+    #resp.headers['Access-Control-Allow-Origin'] = "*"
+    resp.headers.add('Access-Control-Allow-Origin', "*")
+    return resp
+    #return {"items": result_list}
 
 @app.route("/add-item", methods=['POST'])
-@cross_origin()
+#@cross_origin()
 def add_item():
     resp = json.loads(request.data)
     newitem = GroceryItem(resp['name'], resp['quantity'], resp['cost'])
