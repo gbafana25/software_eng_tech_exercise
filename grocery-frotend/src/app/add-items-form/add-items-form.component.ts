@@ -19,7 +19,7 @@ export class AddItemsFormComponent {
 
     onAddItem() {
       console.log(this.prod_name, this.prod_quantity, this.prod_cost)
-      fetch("http://172.31.1.240:5000/add-item", {
+      fetch("http://ec2-3-144-83-59.us-east-2.compute.amazonaws.com:5000/add-item", {
         method: "POST",
         body: JSON.stringify({
           name: this.prod_name,

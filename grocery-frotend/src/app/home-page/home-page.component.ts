@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,7 +22,8 @@ export class HomePageComponent {
   }
 
   async getGroceryItems() {
-    const resp = await fetch("http://172.31.1.240:5000/get-items")
+    var h = new HttpHeaders().append("Referrer-Policy", "no-referrer")
+    const resp = await fetch("http://ec2-3-144-83-59.us-east-2.compute.amazonaws.com:5000/get-items")
     this.all_items = await resp.json()
     console.log(this.all_items)
   }
@@ -42,7 +43,7 @@ export class HomePageComponent {
       costfield = this.cost_search
     }
     
-    const r = await fetch("http://172.31.1.240:5000/search-items", {
+    const r = await fetch("http://ec2-3-144-83-59.us-east-2.compute.amazonaws.com:5000/search-items", {
       method: "POST",
       body: JSON.stringify({
         name: namefield,

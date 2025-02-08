@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn daemon
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/home/ubuntu/tech_exercise
+ExecStart=/bin/bash -c 'cd /home/ubuntu/tech_exercise/backend && source /home/ubuntu/tech_exercise/backend/env/bin/activate && /home/ubuntu/tech_exercise/backend/env/bin/gunicorn --workers 3 --bind ec2-3-144-83-59.us-east-2.compute.amazonaws.com:5000 app:app'
+
+
+
+[Install]
+WantedBy=multi-user.target
