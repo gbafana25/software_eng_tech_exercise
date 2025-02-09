@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-items-form',
@@ -12,6 +13,8 @@ export class AddItemsFormComponent {
     prod_name: any;
     prod_quantity: any;
     prod_cost: any;
+
+    constructor(private router: Router) {}
 
     ngOnInit() {
 
@@ -27,5 +30,6 @@ export class AddItemsFormComponent {
           cost: this.prod_cost
         })
       })
+      this.router.navigate(['/home'])
     }
 }

@@ -21,6 +21,13 @@ export class HomePageComponent {
     this.getGroceryItems();
   }
 
+  clearSearch() {
+    this.getGroceryItems();
+    this.name_search = "";
+    this.quant_search = null;
+    this.cost_search = null;
+  }
+
   async getGroceryItems() {
     var h = new HttpHeaders().append("Referrer-Policy", "no-referrer")
     const resp = await fetch("http://ec2-3-144-83-59.us-east-2.compute.amazonaws.com:5000/get-items")

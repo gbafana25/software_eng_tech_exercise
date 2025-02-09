@@ -24,6 +24,27 @@ div {
     color: #555;
 }
 
+.clear-btn {
+    font-size: 16px;
+    background-color: red;
+    max-width: 30%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.clear-btn:hover {
+    transition-duration: 0.5s;
+    background-color: #d74c4c;
+}
+
+.search-btn {
+    margin: 10px;
+}
+
+.search-btns {
+    display: flex;
+}
+
 input.search-elements {
     width: 100%;
     padding: 12px;
@@ -39,6 +60,8 @@ input.search-elements:focus {
     border-color: #d74c4c;
     outline: none;
 }
+
+
 
 button {
     width: 100%;

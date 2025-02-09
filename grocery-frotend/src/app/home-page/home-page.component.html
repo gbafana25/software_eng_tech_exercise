@@ -9,7 +9,10 @@
     <label class="search-elements" for="cost_input">Cost</label>
     <input class="search-elements" name="cost_input" type="number" step=".01" [(ngModel)]="cost_search">
 
-    <button (click)="searchItems()">Search</button>
+    <div class="search-btns">
+      <button class="clear-btn" (click)="clearSearch()">Clear</button>
+      <button class="search-btn" (click)="searchItems()">Search</button>
+    </div>
 </div>
 
 <h2>Current List</h2>
