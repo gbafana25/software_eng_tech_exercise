@@ -31,10 +31,14 @@ def before_req():
 #@cross_origin()
 def get_items():
     all_items = GroceryItem.query.all()
+    cost_total = 0
+    total_items = 0
     items_list = []
     for i in all_items:
         items_list.append({"name": i.name, "quantity": i.quantity, "cost": i.cost})
-    resp = Response(response=json.dumps({"items": items_list}))
+        cost_total += i.cost
+        total_items += i.quantity
+    resp = Response(response=json.dumps({"items": items_list, "cost_total": cost_total, "total_items": total_items}))
     #resp.headers['Access-Control-Allow-Origin'] = "*"
     resp.headers.add('Access-Control-Allow-Origin', "*")
     return resp
