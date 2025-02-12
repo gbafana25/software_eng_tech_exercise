@@ -36,7 +36,7 @@ def get_items():
     items_list = []
     for i in all_items:
         items_list.append({"name": i.name, "quantity": i.quantity, "cost": i.cost})
-        cost_total += i.cost
+        cost_total += i.cost*i.quantity
         total_items += i.quantity
     resp = Response(response=json.dumps({"items": items_list, "cost_total": cost_total, "total_items": total_items}))
     #resp.headers['Access-Control-Allow-Origin'] = "*"

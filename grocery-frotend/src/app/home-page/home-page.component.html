@@ -1,28 +1,32 @@
-<h2>Search Groceries</h2>
-<div>
-    <label class="search-elements" for="name_input">Name</label>
-    <input class="search-elements" name="name_input" type="text" [(ngModel)]="name_search">
+<h2 >Search Groceries</h2>
+<ul class="inner-list">
+    <li class="search-container">
+      <label class="search-elements" for="name_input">Name</label>
+      <input class="search-elements" name="name_input" type="text" [(ngModel)]="name_search">
 
-    <label class="search-elements" for="quant_input">Quantity</label>
-    <input class="search-elements" name="quant_input" type="number" [(ngModel)]="quant_search">
+      <label class="search-elements" for="quant_input">Quantity</label>
+      <input class="search-elements" name="quant_input" type="number" [(ngModel)]="quant_search">
 
-    <label class="search-elements" for="cost_input">Cost</label>
-    <input class="search-elements" name="cost_input" type="number" step=".01" [(ngModel)]="cost_search">
+      <label class="search-elements" for="cost_input">Cost</label>
+      <input class="search-elements" name="cost_input" type="number" step=".01" [(ngModel)]="cost_search">
 
-    <div class="search-btns">
-      <button class="clear-btn" (click)="clearSearch()">Clear</button>
-      <button class="search-btn" (click)="searchItems()">Search</button>
-    </div>
-</div>
+      <div class="search-btns">
+        <button class="clear-btn" (click)="clearSearch()">Clear</button>
+        <button class="search-btn" (click)="searchItems()">Search</button>
+      </div>
+    </li>
 
-<h2>Current List</h2>
-<h3>Total # of items: {{ all_items.total_items }} | Cart total: ${{ all_items.cost_total | number : '1.2-2' }}</h3>
-<ul *ngFor="let item of all_items.items">
-  <li class="list-item">
-    <div class="item-container">
-      <div class="item-name">{{item.name}}</div>
-      <div class="item-quantity">Quantity: {{item.quantity}}</div>
-      <div class="item-cost">Cost: ${{item.cost | number:'1.2-2'}}</div>
-    </div>
+  <li class="cart-container">
+    <h2 class="cart-container">Current List</h2>
+    <h3 class="cart-summary">Total # of items: {{ all_items.total_items }} | Cart total: ${{ all_items.cost_total | number : '1.2-2' }}</h3>
+    <ul *ngFor="let item of all_items.items">
+      <li class="list-item">
+        <div class="item-container">
+          <div class="item-name">{{item.name}}</div>
+          <div class="item-quantity">x {{item.quantity}}</div>
+          <div class="item-cost">${{item.cost | number:'1.2-2'}}</div>
+        </div>
+      </li>
+    </ul>
   </li>
 </ul>

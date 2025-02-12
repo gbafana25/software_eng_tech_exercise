@@ -6,6 +6,7 @@
 npm-debug.log
 yarn-error.log
 certs/
+dist/
 
 # IDEs and editors
 .idea/
