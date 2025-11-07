@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../node_modules/.prisma/"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://test:test@localhost:3306/testdb"
+}
+
+model GroceryItem {
+  id       Int    @id @default(autoincrement())
+  name     String @db.VarChar(255)
+  quantity Int
+  price    Float
+}

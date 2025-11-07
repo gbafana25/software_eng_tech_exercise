@@ -1,9 +1,16 @@
-services:
-  frontend:
-    build: ./grocery-frotend
-    ports:
-      - "80:80"
-  backend:
-    build: ./backend
-    ports:
-      - "5000:5000"
+    version: '3.8'
+    services:
+      mysql_db:
+        image: mysql:8.0 # You can specify a different version if needed
+        environment:
+          MYSQL_ROOT_PASSWORD: test # Replace with a strong password
+          MYSQL_DATABASE: testdb # Optional: create a database on startup
+          MYSQL_USER: test # Optional: create a user
+          MYSQL_PASSWORD: test # Optional: password for the user
+        ports:
+          - "3306:3306" # Map host port 3306 to container port 3306
+        volumes:
+          - mysql_data:/var/lib/mysql # Persist data in a named volume
+        restart: always # Restart the container if it stops
+    volumes:
+      mysql_data: # Define the named volume

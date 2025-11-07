@@ -7,6 +7,6 @@ export default defineConfig({
   },
   engine: "classic",
   datasource: {
-    url: "sqlite:///items.sqlite3",
+    url: "mysql://root:test@localhost:3306/testdb",
   },
 });
