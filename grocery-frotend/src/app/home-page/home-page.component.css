@@ -14,7 +14,7 @@ body {
   
   .search-container, .cart-container {
     background: #ffffff;
-    padding: 10px;
+    padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     list-style-type: none;
@@ -22,11 +22,11 @@ body {
   }
 
   .inner-list {
-    display: inline-block;
+    display: flex;
   }
 
   .cart-container {
-    width: 40%;
+    width: 60%;
     float: right;
   }
 
@@ -58,11 +58,10 @@ body {
     font-weight: bold;
     color: #222;
     background: #f8f9fa;
-    padding: 15px;
+    padding-left: 55px;
+    padding-right: 55px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
   }
   
   .search-btns {

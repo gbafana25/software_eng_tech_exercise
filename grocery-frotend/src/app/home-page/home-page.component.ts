@@ -3,14 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { PrismaClient } from '.prisma/client';
-
-const prisma = new PrismaClient();
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [NgFor, FormsModule, CommonModule, BrowserModule],
+  imports: [NgFor, FormsModule, CommonModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
@@ -19,12 +16,6 @@ export class HomePageComponent {
   name_search: any;
   quant_search: any;
   cost_search: any;
-  
-  
-  async prismareqs() {
-    const allItems = await prisma.groceryItem.findMany();
-    return allItems;
-  }
     
 
   ngOnInit() {
@@ -40,10 +31,9 @@ export class HomePageComponent {
 
   async getGroceryItems() {
     var h = new HttpHeaders().append("Referrer-Policy", "no-referrer")
-    const resp = await fetch("http://ec2-3-144-83-59.us-east-2.compute.amazonaws.com:5000/get-items")
+    const resp = await fetch("http://localhost:5000/get-items")
     this.all_items = await resp.json()
     console.log(this.all_items)
-    console.log(this.prismareqs())
   }
 
   async searchItems() {
@@ -61,7 +51,7 @@ export class HomePageComponent {
       costfield = this.cost_search
     }
     
-    const r = await fetch("http://ec2-3-144-83-59.us-east-2.compute.amazonaws.com:5000/search-items", {
+    const r = await fetch("http://localhost:5000/search-items", {
       method: "POST",
       body: JSON.stringify({
         name: namefield,

@@ -5,14 +5,14 @@ import json
 from sqlalchemy import and_, or_
 
 app = Flask(__name__)
-#CORS(app)
+CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///items.sqlite3"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:test@localhost:3306/testdb"
 db = SQLAlchemy(app)
 
 class GroceryItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    name = db.Column(db.String(255))
     quantity = db.Column(db.Integer)
     cost = db.Column(db.Float)
 
