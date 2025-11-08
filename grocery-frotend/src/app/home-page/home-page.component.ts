@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-home-page',
@@ -31,7 +31,7 @@ export class HomePageComponent {
 
   async getGroceryItems() {
     var h = new HttpHeaders().append("Referrer-Policy", "no-referrer")
-    const resp = await fetch("http://localhost:5000/get-items")
+    const resp = await fetch(environment.api_url+"/get-items")
     this.all_items = await resp.json()
     console.log(this.all_items)
   }
