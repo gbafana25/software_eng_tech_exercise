@@ -7,7 +7,7 @@ from sqlalchemy import and_, or_
 app = Flask(__name__)
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:test@127.0.0.1:3306/testdb"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:test@mysql_db:3306/testdb"
 db = SQLAlchemy(app)
 
 class GroceryItem(db.Model):
