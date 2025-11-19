@@ -4,12 +4,15 @@ services:
       context: backend
     restart: unless-stopped
     ports:
+      # TODO Remove this port declaration when adding frontend if backend doesn't need to be exposed to the interwebs
       - "5000:5000"
     environment:
       DB_CONNECTION_URI: ${DB_CONNECTION_URI}
     depends_on:
       mysql_db:
         condition: service_healthy
+    networks:
+      - private
   mysql_db:
     image: mysql:8.0 # You can specify a different version if needed
     environment:
@@ -17,8 +20,6 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE} # Optional: create a database on startup
       MYSQL_USER: ${DB_USER} # Optional: create a user
       MYSQL_PASSWORD: ${DB_PASS} # Optional: password for the user
-    ports:
-      - "3306:3306" # Map host port 3306 to container port 3306
     volumes:
       - mysql_data:/var/lib/mysql # Persist data in a named volume
     restart: unless-stopped
@@ -27,6 +28,13 @@ services:
       interval: 3s
       retries: 5
       start_period: 30s # Restart the container if it stops
+    networks:
+      - private
+
+networks:
+  private:
+    name: private
+
 volumes:
   mysql_data: # Define the named volume
 
