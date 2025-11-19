@@ -1,32 +1,32 @@
-version: '3.8'
 services:
   backend:
     build:
       context: backend
-    restart: always
+    restart: unless-stopped
     ports:
-      - 5000:5000
+      - "5000:5000"
+    environment:
+      DB_CONNECTION_URI: ${DB_CONNECTION_URI}
     depends_on:
       mysql_db:
         condition: service_healthy
-    network_mode: "host"
   mysql_db:
     image: mysql:8.0 # You can specify a different version if needed
     environment:
-      MYSQL_ROOT_PASSWORD: test # Replace with a strong password
-      MYSQL_DATABASE: testdb # Optional: create a database on startup
-      MYSQL_USER: test # Optional: create a user
-      MYSQL_PASSWORD: test # Optional: password for the user
+      MYSQL_ROOT_PASSWORD: ${DB_ROOTPASS} # Replace with a strong password
+      MYSQL_DATABASE: ${DB_DATABASE} # Optional: create a database on startup
+      MYSQL_USER: ${DB_USER} # Optional: create a user
+      MYSQL_PASSWORD: ${DB_PASS} # Optional: password for the user
     ports:
       - "3306:3306" # Map host port 3306 to container port 3306
-    network_mode: "host"
     volumes:
       - mysql_data:/var/lib/mysql # Persist data in a named volume
-    restart: always
+    restart: unless-stopped
     healthcheck:
-      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 --password="test" --silent']
+      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 -u "$${DB_USER}" --password="$${DB_PASS}" --silent']
       interval: 3s
       retries: 5
       start_period: 30s # Restart the container if it stops
 volumes:
   mysql_data: # Define the named volume
+
