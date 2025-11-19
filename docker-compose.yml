@@ -1,11 +1,20 @@
 services:
+  frontend:
+    container_name: frontend
+    build:
+      context: grocery-frotend
+    restart: unless-stopped
+    ports:
+      - "4000:80"
+    environment:
+      API_URL: ${BACKEND_API_URL}
+    networks:
+      - private
   backend:
+    container_name: backend
     build:
       context: backend
     restart: unless-stopped
-    ports:
-      # TODO Remove this port declaration when adding frontend if backend doesn't need to be exposed to the interwebs
-      - "5000:5000"
     environment:
       DB_CONNECTION_URI: ${DB_CONNECTION_URI}
     depends_on:
