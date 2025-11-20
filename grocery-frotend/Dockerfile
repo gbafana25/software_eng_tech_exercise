@@ -1,4 +1,4 @@
-FROM node:18.18.2-alpine3.18 AS build
+FROM node:18.18.2-alpine3.18
 
 WORKDIR /dist/src/app
 RUN npm cache clean --force
