@@ -9,7 +9,7 @@ services:
     environment:
       API_URL: ${BACKEND_API_URL}
     networks:
-      - front
+      - frontend
 
   backend:
     container_name: backend
@@ -22,8 +22,8 @@ services:
       mysql_db:
         condition: service_healthy
     networks:
-      - front
-      - back
+      - frontend
+      - backend
 
   mysql_db:
     image: mysql:8.0 # You can specify a different version if needed
@@ -34,6 +34,8 @@ services:
       MYSQL_PASSWORD: ${DB_PASS} # Optional: password for the user
     volumes:
       - mysql_data:/var/lib/mysql # Persist data in a named volume
+    ports:
+      - "3306:3306"
     restart: unless-stopped
     healthcheck:
       test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 -u "$${DB_USER}" --password="$${DB_PASS}" --silent']
@@ -41,13 +43,15 @@ services:
       retries: 5
       start_period: 30s # Restart the container if it stops
     networks:
-      - back
+      - backend
 
 networks:
-  front:
-    name: front
-  back:
-    name: back
+  frontend:
+    # Specify driver options
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"
+  backend:
 
 volumes:
   mysql_data: # Define the named volume
