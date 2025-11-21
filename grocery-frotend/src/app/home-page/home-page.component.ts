@@ -16,7 +16,7 @@ export class HomePageComponent {
   name_search: any;
   quant_search: any;
   cost_search: any;
-    
+
 
   ngOnInit() {
     this.getGroceryItems();
@@ -31,7 +31,7 @@ export class HomePageComponent {
 
   async getGroceryItems() {
     var h = new HttpHeaders().append("Referrer-Policy", "no-referrer")
-    const resp = await fetch("http://"+environment.api_url+":5000/get-items")
+    const resp = await fetch("/api/get-items")
     this.all_items = await resp.json()
     console.log(this.all_items)
   }
@@ -50,8 +50,8 @@ export class HomePageComponent {
     if(this.cost_search != undefined) {
       costfield = this.cost_search
     }
-    
-    const r = await fetch("http://"+environment.api_url+":5000/search-items", {
+
+    const r = await fetch("/api/search-items", {
       method: "POST",
       body: JSON.stringify({
         name: namefield,
