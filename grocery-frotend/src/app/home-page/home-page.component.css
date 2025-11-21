@@ -96,6 +96,21 @@ body {
   .search-btn:hover {
     background-color: #2980b9;
   }
+
+  .remove-btn {
+    padding: 12px 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+    background-color: #e74c3c;
+    color: white;
+  }
+
+  .remove-btn:hover {
+    background-color: #c0392b;
+  }
   
   ul {
     list-style-type: none;

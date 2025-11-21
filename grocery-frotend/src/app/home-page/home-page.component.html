@@ -25,6 +25,7 @@
           <div class="item-name">{{item.name}}</div>
           <div class="item-quantity">x {{item.quantity}}</div>
           <div class="item-cost">${{item.cost | number:'1.2-2'}}</div>
+          <div><button class="remove-btn" (click)="deleteItem(item.name)">Remove</button></div>
         </div>
       </li>
     </ul>

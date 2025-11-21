@@ -3,6 +3,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -17,6 +18,7 @@ export class HomePageComponent {
   quant_search: any;
   cost_search: any;
 
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.getGroceryItems();
@@ -27,6 +29,17 @@ export class HomePageComponent {
     this.name_search = "";
     this.quant_search = null;
     this.cost_search = null;
+  }
+
+  deleteItem(item: string) {
+    fetch("/api/delete-item", {
+      method: "POST",
+      body: JSON.stringify({
+        name: item
+      })
+    }).then(r => {
+      window.location.reload();
+    })
   }
 
   async getGroceryItems() {

@@ -78,6 +78,16 @@ def add_item():
     db.session.commit()
     return "response received"
 
+@app.route("/delete-item", methods=['POST'])
+def delete_item():
+    resp = json.loads(request.data)
+    GroceryItem.query.filter_by(name=resp["name"]).delete()
+    db.session.commit()
+    
+    response = Response(response={"delete": "deleted item"})
+    response.headers.add('Access-Control-Allow-Origin', "*")
+    return response
+
 with app.app_context():
     db.create_all()
 
