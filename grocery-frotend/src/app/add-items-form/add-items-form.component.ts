@@ -23,7 +23,7 @@ export class AddItemsFormComponent {
 
     onAddItem() {
       console.log(this.prod_name, this.prod_quantity, this.prod_cost)
-      fetch("http://"+environment.api_url+":5000/add-item", {
+      fetch("/api/add-item", {
         method: "POST",
         body: JSON.stringify({
           name: this.prod_name,

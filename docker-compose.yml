@@ -1,32 +1,71 @@
-version: '3.8'
 services:
+  caddy:
+    container_name: caddy
+    image: caddy:2.10.2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./caddy:/etc/caddy
+      - caddy_data:/data
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - caddy
+
+  frontend:
+    container_name: frontend
+    build:
+      context: grocery-frotend
+    restart: unless-stopped
+    networks:
+      - caddy
+
   backend:
-      build:
-        context: backend
-      restart: always
-      ports:
-        - 5000:5000
-      depends_on:
-        mysql_db:
-          condition: service_healthy
-      network_mode: "host"
+    container_name: backend
+    build:
+      context: backend
+    restart: unless-stopped
+    environment:
+      DB_CONNECTION_URI: ${DB_CONNECTION_URI}
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    networks:
+      - caddy
+      - database
+
   mysql_db:
     image: mysql:8.0 # You can specify a different version if needed
+    container_name: mysql_db
     environment:
-      MYSQL_ROOT_PASSWORD: test # Replace with a strong password
-      MYSQL_DATABASE: testdb # Optional: create a database on startup
-      MYSQL_USER: test # Optional: create a user
-      MYSQL_PASSWORD: test # Optional: password for the user
-    ports:
-      - "3306:3306" # Map host port 3306 to container port 3306
-    network_mode: "host"
+      MYSQL_ROOT_PASSWORD: ${DB_ROOTPASS} # Replace with a strong password
+      MYSQL_DATABASE: ${DB_DATABASE} # Optional: create a database on startup
+      MYSQL_USER: ${DB_USER} # Optional: create a user
+      MYSQL_PASSWORD: ${DB_PASS} # Optional: password for the user
     volumes:
       - mysql_data:/var/lib/mysql # Persist data in a named volume
-    restart: always
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
     healthcheck:
-      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 --password="test" --silent']
+      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 -u "$${DB_USER}" --password="$${DB_PASS}" --silent']
       interval: 3s
       retries: 5
       start_period: 30s # Restart the container if it stops
+    networks:
+      - database
+
+networks:
+  caddy:
+    name: caddy
+  database:
+    name: database
+
 volumes:
-  mysql_data: # Define the named volume
+  mysql_data:
+    name: final_project_mysql_data
+  caddy_data:
+    name: final_project_caddy_data
+

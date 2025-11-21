@@ -3,6 +3,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -16,7 +17,8 @@ export class HomePageComponent {
   name_search: any;
   quant_search: any;
   cost_search: any;
-    
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.getGroceryItems();
@@ -29,9 +31,20 @@ export class HomePageComponent {
     this.cost_search = null;
   }
 
+  deleteItem(item: string) {
+    fetch("/api/delete-item", {
+      method: "POST",
+      body: JSON.stringify({
+        name: item
+      })
+    }).then(r => {
+      window.location.reload();
+    })
+  }
+
   async getGroceryItems() {
     var h = new HttpHeaders().append("Referrer-Policy", "no-referrer")
-    const resp = await fetch("http://"+environment.api_url+":5000/get-items")
+    const resp = await fetch("/api/get-items")
     this.all_items = await resp.json()
     console.log(this.all_items)
   }
@@ -50,8 +63,8 @@ export class HomePageComponent {
     if(this.cost_search != undefined) {
       costfield = this.cost_search
     }
-    
-    const r = await fetch("http://"+environment.api_url+":5000/search-items", {
+
+    const r = await fetch("/api/search-items", {
       method: "POST",
       body: JSON.stringify({
         name: namefield,

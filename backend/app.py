@@ -1,13 +1,15 @@
+import os
+import json
+
 from flask import Flask, request, jsonify, Response
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
-import json
 from sqlalchemy import and_, or_
 
 app = Flask(__name__)
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:test@mysql_db:3306/testdb"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DB_CONNECTION_URI"]
 db = SQLAlchemy(app)
 
 class GroceryItem(db.Model):
@@ -23,8 +25,8 @@ class GroceryItem(db.Model):
 
 @app.before_request
 def before_req():
-    headers = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' } 
-    if request.method == 'OPTIONS' or request.method == 'options': 
+    headers = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' }
+    if request.method == 'OPTIONS' or request.method == 'options':
         return jsonify(headers), 200
 
 @app.route("/get-items", methods=['GET'])
@@ -76,8 +78,19 @@ def add_item():
     db.session.commit()
     return "response received"
 
+@app.route("/delete-item", methods=['POST'])
+def delete_item():
+    resp = json.loads(request.data)
+    GroceryItem.query.filter_by(name=resp["name"]).delete()
+    db.session.commit()
+    
+    response = Response(response={"delete": "deleted item"})
+    response.headers.add('Access-Control-Allow-Origin', "*")
+    return response
+
 with app.app_context():
     db.create_all()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
