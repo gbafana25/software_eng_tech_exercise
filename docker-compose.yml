@@ -16,16 +16,14 @@ services:
 
   frontend:
     container_name: frontend
-    build:
-      context: grocery-frotend
+    image: 921075274644.dkr.ecr.us-east-1.amazonaws.com/csci4650-final/frontend:latest
     restart: unless-stopped
     networks:
       - caddy
 
   backend:
     container_name: backend
-    build:
-      context: backend
+    image: 921075274644.dkr.ecr.us-east-1.amazonaws.com/csci4650-final/backend:latest
     restart: unless-stopped
     environment:
       DB_CONNECTION_URI: ${DB_CONNECTION_URI}
