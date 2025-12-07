@@ -16,45 +16,19 @@ services:
 
   frontend:
     container_name: frontend
-    build:
-      context: grocery-frotend
+    image: 921075274644.dkr.ecr.us-east-1.amazonaws.com/csci4650-final/frontend:latest
     restart: unless-stopped
     networks:
       - caddy
 
   backend:
     container_name: backend
-    build:
-      context: backend
+    image: 921075274644.dkr.ecr.us-east-1.amazonaws.com/csci4650-final/backend:latest
     restart: unless-stopped
     environment:
       DB_CONNECTION_URI: ${DB_CONNECTION_URI}
-    depends_on:
-      mysql_db:
-        condition: service_healthy
     networks:
       - caddy
-      - database
-
-  mysql_db:
-    image: mysql:8.0 # You can specify a different version if needed
-    container_name: mysql_db
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOTPASS} # Replace with a strong password
-      MYSQL_DATABASE: ${DB_DATABASE} # Optional: create a database on startup
-      MYSQL_USER: ${DB_USER} # Optional: create a user
-      MYSQL_PASSWORD: ${DB_PASS} # Optional: password for the user
-    volumes:
-      - mysql_data:/var/lib/mysql # Persist data in a named volume
-    ports:
-      - "3306:3306"
-    restart: unless-stopped
-    healthcheck:
-      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 -u "$${DB_USER}" --password="$${DB_PASS}" --silent']
-      interval: 3s
-      retries: 5
-      start_period: 30s # Restart the container if it stops
-    networks:
       - database
 
 networks:
