@@ -16,26 +16,23 @@ services:
 
   frontend:
     container_name: frontend
-    image: 921075274644.dkr.ecr.us-east-1.amazonaws.com/csci4650-final/frontend:latest
+    image: public.ecr.aws/y1i2z7p3/csci4650-final/frontend:latest
     restart: unless-stopped
     networks:
       - caddy
 
   backend:
     container_name: backend
-    image: 921075274644.dkr.ecr.us-east-1.amazonaws.com/csci4650-final/backend:latest
+    image: public.ecr.aws/y1i2z7p3/csci4650-final/backend:latest
     restart: unless-stopped
     environment:
       DB_CONNECTION_URI: ${DB_CONNECTION_URI}
     networks:
       - caddy
-      - database
 
 networks:
   caddy:
     name: caddy
-  database:
-    name: database
 
 volumes:
   mysql_data:
