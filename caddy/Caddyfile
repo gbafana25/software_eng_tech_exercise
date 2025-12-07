@@ -4,7 +4,9 @@
     }
 
     handle_path /* {
-        reverse_proxy frontend:4200
+        reverse_proxy frontend:4200 {
+            header_up Host "localhost"
+        }
     }
 }
 

@@ -11,7 +11,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "outputPath": "dist/grocery-frotend",
             "index": "src/index.html",
@@ -70,10 +70,9 @@
             }
           },
           "options":{
-            "browserTarget":"grocery-frotend:build",
+            "buildTarget":"grocery-frotend:build",
             "allowedHosts": [
-              "*",
-              "*.amazonaws.com"
+              "localhost"
             ]
           }
           "defaultConfiguration": "development"
