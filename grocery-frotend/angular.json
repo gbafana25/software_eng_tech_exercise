@@ -73,7 +73,7 @@
             "browserTarget":"grocery-frotend:build",
             "allowedHosts": [
               "*",
-              "ec2-98-92-57-183.compute-1.amazonaws.com"
+              "*.amazonaws.com"
             ]
           }
           "defaultConfiguration": "development"
